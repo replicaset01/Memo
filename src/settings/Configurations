@@ -1,0 +1,6 @@
+//i Configuration
+
+[Lombok]
+compileOnly {
+extendsFrom annotationProcessor
+}
