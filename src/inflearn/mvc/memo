@@ -1,0 +1,17 @@
+//i application.properties
+//로깅
+logging.level.org.apache.coyote.http11=debug
+
+
+//i Annonation
+
+
+@ServletComponentScan
+
+@WebServlet(name = "helloServlet", urlPatterns = "/hello")
+name = 서블릿 이름, urlPatterns = URL 매핑
+
+//i Class
+HttpServlet =
+HttpServletRequest = 요청
+HttpServletResponso = 응답
