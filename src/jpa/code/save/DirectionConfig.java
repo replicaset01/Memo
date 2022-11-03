@@ -1,4 +1,4 @@
-package jpa_example.save;
+package jpa.code.save;
 
 import com.codestates.entity.Member;
 import com.codestates.entity.Order;

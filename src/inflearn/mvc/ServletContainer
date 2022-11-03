@@ -12,6 +12,6 @@ logging.level.org.apache.coyote.http11=debug
 name = 서블릿 이름, urlPatterns = URL 매핑
 
 //i Class
-HttpServlet =
+HttpServlet = 클래스에 상속받아서 씀, request,response 기능 보유
 HttpServletRequest = 요청
 HttpServletResponso = 응답
