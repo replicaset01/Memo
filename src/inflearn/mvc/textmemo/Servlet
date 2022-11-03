@@ -14,4 +14,4 @@ name = 서블릿 이름, urlPatterns = URL 매핑
 //i Class
 HttpServlet = 클래스에 상속받아서 씀, request,response 기능 보유
 HttpServletRequest = 요청
-HttpServletResponso = 응답
+HttpServletResponse = 응답
