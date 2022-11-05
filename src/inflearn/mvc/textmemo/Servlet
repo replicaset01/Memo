@@ -15,3 +15,97 @@ name = 서블릿 이름, urlPatterns = URL 매핑
 HttpServlet = 클래스에 상속받아서 씀, request,response 기능 보유
 HttpServletRequest = 요청
 HttpServletResponse = 응답
+
+-----
+컨트롤러v
+
+//i controller Interface
+
+v1 = void process(HttpServletRequest request, HttpServletResponse response)
+v2 = void process(HttpServletRequest request, HttpServletResponse response)
+v3 = ModelView process(Map<String, String> paramMap)
+v4 = String process(Map<String, String> paramMap, Map<String, Object> model);
+
+//i FrontController Class
+
+[v1]
+extends HttpServlet
+private Map<String ControllerV1> controllerMap = new HashMap<>();
+생성자 = controllerMap.put(url, subController)
+protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+   String RequestURI = request.getRequestURI();
+   ControllerV1 controller = controllerMap.get(requestURI);
+   if (controller == null) {
+    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    return;
+   }
+   controller.process(request, response);
+}
+
+
+[v2] //i Myview 사용으로 View 분리
+extends HttpServlet
+private Map<String ControllerV1> controllerMap = new HashMap<>();
+생성자 = controllerMap.put(url, subController)
+
+protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+   String RequestURI = request.getRequestURI();
+   ControllerV2 controller = controllerMap.get(requestURI);
+   if (controller == null) {
+    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+    return;
+   }
+
+   Myview view = controller.process(request, response);
+   view.render(request, response);
+}
+
+
+[v3]
+extends HttpServlet
+private Map<String, ControllerV3> controllerMap = new HashMap<>();
+생성자 = controller.put(url, subController)
+
+protected void service(HttpServletRequest request, HttpServletResponse reponse) throws IOException, ServletException {
+    String requestURI = request.getRequestURI();
+    ControllerV3 controller = controllerMap.get(requestURI);
+    if (controller == null) {
+        response.setStatue(HttpServletResponse.SC_NOT_FOUND);
+        return;
+    }
+
+    Map<String, String> paramMap = createParamMap(request); //i createPamramMap 메소드 사용
+    ModelView mv = controller.process(paramMap);
+
+    String viewName = mv.getViewName();
+    MyView view = viewResolver(viewName); //i viewResolver 메소드 사용
+    view.render(mv.getModel(), request, response);
+}
+
+private Myview viewResolver(String viewName) {
+    Myview view = new MyView("/WEB-INF/views/" + viewName + ".jsp");
+    return view;
+}
+
+private Map<String, String> createParamMap(HttpServletRequest request) {
+    Map<String, String> paramMap = new HashMap<>();
+    request.getParameterNames().asIterator()
+        .forEachRemaining(paramName -> paramMap.put(paramName, request.getParameter(paramName)));
+    return paramMap;
+}
+
+//i view, model 분리
+
+[Myview Class] //i Myview 사용
+private String viewPath;
+생성자 생성
+public void render(HttpServletRequest, HttpServletResponse)
+public void render(HttpServletRequest, HttpServletResponse)
+private void modelToRequestAttribute(Map<String, Object> model, HttpServletRequest request) {
+    model.forEach((key, value) -> request.setAttribute(key, value));
+}
+
+
+
+
+

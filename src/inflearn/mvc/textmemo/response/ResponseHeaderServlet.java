@@ -27,7 +27,6 @@ public class ResponseHeaderServlet extends HttpServlet {
 //        content(response);
 //        cookie(response);
 //        redirect(response);
-
         PrintWriter writer = response.getWriter();
         writer.println("안녕하세요");
     }
