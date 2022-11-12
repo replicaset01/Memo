@@ -1,0 +1,197 @@
+package com.codestates.restdocs;
+
+import com.codestates.member.controller.MemberController;
+import com.codestates.member.dto.MemberDto;
+import com.codestates.member.entity.Member;
+import com.codestates.member.mapper.MemberMapper;
+import com.codestates.member.service.MemberService;
+import com.codestates.stamp.Stamp;
+import com.google.gson.Gson;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
+import org.springframework.http.MediaType;
+import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
+import java.util.List;
+
+import static com.codestates.util.ApiDocumentUtils.getRequestPreProcessor;
+import static com.codestates.util.ApiDocumentUtils.getResponsePreProcessor;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.patch;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@WebMvcTest(MemberController.class) //i controller 테스트를 위한 전용 어노테이션
+@MockBean(JpaMetamodelMappingContext.class)
+@AutoConfigureRestDocs
+public class MemberControllerRestDocsTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private Gson gson;
+
+    @MockBean  //i 테스트 대상 Controller 클래스가 의존하는 객체를 Mock Bean 객체로 주입
+    private MemberMapper mapper;
+    @MockBean
+    private MemberService memberService;
+
+    //do ------------------------------------------------------------------------------
+
+    @Test
+    public void postMemberTest() throws Exception {
+
+        //i given
+        //do Test Data (request body)
+        MemberDto.Post post = new MemberDto.Post("abc@abc.com", "skw", "010-1111-1111");
+        String content = gson.toJson(post);
+
+        //do Test Data (response body)
+        MemberDto.response responseDto = new MemberDto.response(
+                1L,
+                "abc@abc.com",
+                "skw",
+                "010-1111-1111",
+                Member.MemberStatus.MEMBER_ACTIVE,
+                new Stamp());
+
+        //do Mock 객체를 이용한 Stubbing
+        /**
+         * Controller의 postMember()에 의존하느 객체의 메소드 호출을
+         * 위에서 주입받은 Mock 객체를 사용해서 Stubbing
+         */
+        given(mapper.memberPostToMember(Mockito.any(MemberDto.Post.class))).willReturn(new Member());
+        given(memberService.createMember(Mockito.any(Member.class))).willReturn(new Member());
+        given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(responseDto);
+
+        //i when (post 요청 전송)
+        ResultActions actions =
+                mockMvc.perform(post("/v11/members")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(content));
+
+        //i then
+        actions
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.data.email").value(post.getEmail()))
+                .andExpect(jsonPath("$.data.name").value(post.getName()))
+                .andExpect(jsonPath("$.data.phone").value(post.getPhone()))
+                .andDo(document(
+                        "post-member", //i API 문서 스니핏 식별자 역할, 'post-member' 디렉토리 하위에 생성
+
+                        /** //i 2,3번째 파라미터
+                         * 문서 스니핏을 생성하기 전, request & response에 해당하는 문서영역을
+                         * 전처리하는 역할을 하는 ApiDocumentUtils 인터페이스와 같이 공통화 한 후,
+                         * 모든 테스트 케이스에서 재사용 할 수 있도록 함
+                         */
+                        getRequestPreProcessor(),
+                        getResponsePreProcessor(),
+                        /**
+                         * //i requestFields()
+                         * 문서로 표현될 request body, 파라미터로 전달되는 List<FieldDescriptor>의 원소인
+                         * FieldDescriptor 객체가 request body에 포함된 데이터를 표현
+                         * JsonFIeldType.STRING = JSON 프로퍼티의 값이 문자열임을 의미함
+                         * //i responseFields()
+                         * 문서로 표현될 response body, 파라미터로 전달되는 List<FieldDescriptor>의 원소인
+                         * FieldDescriptor 객체가 request body에 포함된 데이터를 표현
+                         * JsonFieldType.OBJECT = JSON 포맷으로 표현된 프로퍼티으 값이 객체임을 의미함
+                         * JsonFieldType.NUMBER = JSON 포맷으로 표현돤 프로퍼티의 값이 숫자임을 의미함
+                         */
+                        requestFields(
+                                List.of(
+                                        fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
+                                        fieldWithPath("name").type(JsonFieldType.STRING).description("이름"),
+                                        fieldWithPath("phone").type(JsonFieldType.STRING).description("휴대폰 번호"))),
+                        responseFields(
+                                List.of(
+                                        fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이터"),
+                                        fieldWithPath("data.memberId").type(JsonFieldType.NUMBER).description("회원 식별자"), // (9-7)
+                                        fieldWithPath("data.email").type(JsonFieldType.STRING).description("이메일"),
+                                        fieldWithPath("data.name").type(JsonFieldType.STRING).description("이름"),
+                                        fieldWithPath("data.phone").type(JsonFieldType.STRING).description("휴대폰 번호"),
+                                        fieldWithPath("data.memberStatus").type(JsonFieldType.STRING).description("회원 상태"),
+                                        fieldWithPath("data.stamp").type(JsonFieldType.NUMBER).description("스탬프 갯수")))));
+    }
+
+    @Test
+    public void patchMemberTest() throws Exception {
+        //i given
+        long memberId = 1L;
+        MemberDto.Patch patch = new MemberDto.Patch(memberId, "홍길동", "010-1111-1111", Member.MemberStatus.MEMBER_ACTIVE);
+        String content = gson.toJson(patch);
+
+        MemberDto.response responseDto =
+                new MemberDto.response(1L,
+                        "hgd@gmail.com",
+                        "홍길동",
+                        "010-1111-1111",
+                        Member.MemberStatus.MEMBER_ACTIVE,
+                        new Stamp());
+
+        //i willReturn()이 최소한 null은 아니어야 한다.
+        given(mapper.memberPatchToMember(Mockito.any(MemberDto.Patch.class))).willReturn(new Member());
+
+        given(memberService.updateMember(Mockito.any(Member.class))).willReturn(new Member());
+
+        given(mapper.memberToMemberResponse(Mockito.any(Member.class))).willReturn(responseDto);
+
+        //i when
+        ResultActions actions =
+                mockMvc.perform(
+                        patch("/v11/members/{member-id}", memberId)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(content)
+                );
+
+        //i then
+        actions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.memberId").value(patch.getMemberId()))
+                .andExpect(jsonPath("$.data.name").value(patch.getName()))
+                .andExpect(jsonPath("$.data.phone").value(patch.getPhone()))
+                .andExpect(jsonPath("$.data.memberStatus").value(patch.getMemberStatus().getStatus()))
+                .andDo(document("patch-member",
+                        getRequestPreProcessor(),
+                        getResponsePreProcessor(),
+                        pathParameters(              //i URL의 path variable의 정보 추가
+                                parameterWithName("member-id").description("회원 식별자")
+                        ),
+                        requestFields(
+                                List.of(
+                                        //i path variable 정보로 memberId를 전달 받기 때문에 MemberDto.Patch DTO 클래스에서 request body에 매핑되지 않는 정보,
+                                        //i ignored를 이용해 API 스펙 정보에서 제외
+                                        fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("회원 식별자").ignored(),
+                                        //i 회원 정보는 선택적으로 수정할 수 있어야 함
+                                        //i optional()을 추가해서 API 스펙 정보에서 필수가 아닌 선택 정보로 설정
+                                        fieldWithPath("name").type(JsonFieldType.STRING).description("이름").optional(),
+                                        fieldWithPath("phone").type(JsonFieldType.STRING).description("휴대폰 번호").optional(),
+                                        fieldWithPath("memberStatus").type(JsonFieldType.STRING).description("회원 상태: MEMBER_ACTIVE / MEMBER_SLEEP / MEMBER_QUIT").optional()
+                                )
+                        ),
+                        responseFields(
+                                List.of(
+                                        fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이터"),
+                                        fieldWithPath("data.memberId").type(JsonFieldType.NUMBER).description("회원 식별자"),
+                                        fieldWithPath("data.email").type(JsonFieldType.STRING).description("이메일"),
+                                        fieldWithPath("data.name").type(JsonFieldType.STRING).description("이름"),
+                                        fieldWithPath("data.phone").type(JsonFieldType.STRING).description("휴대폰 번호"),
+                                        fieldWithPath("data.memberStatus").type(JsonFieldType.STRING).description("회원 상태: 활동중 / 휴면 상태 / 탈퇴 상태"),
+                                        fieldWithPath("data.stamp").type(JsonFieldType.NUMBER).description("스탬프 갯수")
+                                )
+                        )
+                ));
+    }
+}
