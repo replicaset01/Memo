@@ -1,3 +1,7 @@
+```java
+
+
+
 package com.codestates.member.service;
 
 import com.codestates.exception.BusinessLogicException;
@@ -84,3 +88,5 @@ public class MemberService {
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
     }
 }
+
+```

@@ -1,4 +1,4 @@
-package inflearn.mvc.textmemo.response;
+```java
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,3 +26,5 @@ public class ResponseHtmlServlet extends HttpServlet {
         writer.println("</html>");
     }
 }
+
+```

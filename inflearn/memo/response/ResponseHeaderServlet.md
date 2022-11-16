@@ -1,3 +1,5 @@
+```java
+
 package inflearn.mvc.textmemo.response;
 
 import javax.servlet.ServletException;
@@ -57,3 +59,5 @@ public class ResponseHeaderServlet extends HttpServlet {
         response.sendRedirect("/basic/hello-form.html");
     }
 }
+
+```

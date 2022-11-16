@@ -1,5 +1,4 @@
-package inflearn.mvc.textmemo.response;
-
+```java
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hello.servlet.basic.HelloData;
 
@@ -33,3 +32,4 @@ public class ResponseJsonServlet extends HttpServlet {
         response.getWriter().write(result);
     }
 }
+```
