@@ -57,4 +57,28 @@ Mapstruct
 --- 리턴
 Converted ResponseDto
 
+//i v6 (@ExceptionHandler 적용)
+
+--- 주입
+MemberService
+MemberMapper
+--- 입력
+RequestBody -> Dto
+--- 변환
+Mapstruct
+--- 리턴
+Converted ResponseDto
+
+//i v7 (ErrorResponse 역할 분리)
+
+--- 주입
+MemberService
+MemberMapper
+--- 입력
+RequestBody -> Dto
+--- 변환
+Mapstruct
+--- 리턴
+Converted ResponseDto
+
 ```

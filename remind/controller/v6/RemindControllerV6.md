@@ -1,7 +1,10 @@
 ```java
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import remindproject.member.dto.MemberPatchDto;
 import remindproject.member.dto.MemberPostDto;
@@ -17,7 +20,8 @@ import java.util.stream.Collectors;
 
 @Validated
 @RestController
-@RequestMapping("/v5/members")
+@RequestMapping("/v6/members")
+@Slf4j
 public class MemberController {
 
     private final MemberService memberService;
@@ -81,5 +85,17 @@ public class MemberController {
         memberService.deleteMember(memberId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
+
+    //i 유효성 검증 실패 시, MethodArgumentNotValidException을 @ExceptionHandler로 받음
+    @ExceptionHandler
+    public ResponseEntity handleException(MethodArgumentNotValidException e)
+    {
+        //i 발생한 에러 정보를 얻음
+        final List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+        //i Response Body로 에러 응답 전달
+        return new ResponseEntity<>(fieldErrors, HttpStatus.BAD_REQUEST);
+    }
 }
+
 ```
