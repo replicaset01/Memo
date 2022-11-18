@@ -1,6 +1,6 @@
 ```text
 
-//i v1
+//i v1 ⭐
 
 --- 주입
 None
@@ -11,7 +11,7 @@ Dto
 --- 리턴
 Dto
 
-//i v2
+//i v2 ⭐
 
 --- 주입
 None
@@ -22,7 +22,7 @@ Handler Method
 --- 리턴
 Entity
 
-//i v3
+//i v3 ⭐
 
 --- 주입
 MemberService
@@ -33,7 +33,7 @@ Handler Method
 --- 리턴
 Entity
 
-//i v4  (mapper Class 사용)
+//i v4  (mapper Class 사용) ⭐
 
 --- 주입
 MemberService
@@ -45,7 +45,7 @@ Mapper
 --- 리턴
 Converted ResponseDto
 
-//i v5 (MapStruct 적용)
+//i v5 (MapStruct 적용) ⭐
 
 --- 주입
 MemberService
@@ -57,7 +57,7 @@ Mapstruct
 --- 리턴
 Converted ResponseDto
 
-//i v6 (@ExceptionHandler 적용)
+//i v6 (@ExceptionHandler 적용) ⭐
 
 --- 주입
 MemberService
@@ -69,7 +69,7 @@ Mapstruct
 --- 리턴
 Converted ResponseDto
 
-//i v7 (ErrorResponse 역할 분리)
+//i v7 (ErrorResponse 역할 분리) ⭐
 //i 새로운 Exception 마다 
 //i ExceptionHandler를 추가로 작성해야함
 
@@ -83,7 +83,7 @@ Mapstruct
 --- 리턴
 Converted ResponseDto
 
-//i v8 (ErrorResponse 역할 분리)
+//i v8 (ErrorResponse 역할 분리) ⭐
 //i 새로운 Exception 마다 
 //i @ExceptionHandler 추가
 
@@ -97,7 +97,7 @@ Mapstruct
 --- 리턴
 Converted ResponseDto
 
-//i v9 (ErrorResponse 역할 분리)
+//i v9 (ErrorResponse 역할 분리) ⭐
 //i 새로운 Exception 마다 
 //i @ExceptionHandler 추가
 

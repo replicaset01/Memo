@@ -1,38 +1,38 @@
 ```text
 ---
-//i v1
+//i v1 ⭐
 ErrorResponse 객체를 응답으로 전송
-//i v2
+//i v2 ⭐
 
 
 
 ---
-//i MemberService
+//i MemberService ⭐
 throw 예외
 BusinessLogicException
 (ExceptionCode.Custom_Status)
 
 ---
-//i Global - Business 처리
+//i Global - Business 처리 ⭐
 공통 처리
 handlerBusinessLogicException
 (BusinessException e)
 return new ResponseEntity
 
 ---
-//i ExceptionCode
+//i ExceptionCode ⭐
 custom
 멤버 - status, message
 
 ---
-//i BusinessLogic
+//i BusinessLogic ⭐
 비즈니스 로직 선택 예외 처리
 RuntimeException을 상속
 멤버 - super exeptionCode.getMessage()
     - exceptionCode
 
 ---
-//i ErrorResponse
+//i ErrorResponse ⭐
 멤버 - List<FieldError> (내부클래스)
     - List<ConstraintViolationError> (내부클래스)
     
@@ -45,7 +45,7 @@ RuntimeException을 상속
     propertyPath, rejectedValue, reason
 
 ----------------------------------------
-//i 과정
+//i 과정 ⭐
 
 1. ErrorResponse에서 에러 응답의 프로퍼티(멤버) 설정
 
