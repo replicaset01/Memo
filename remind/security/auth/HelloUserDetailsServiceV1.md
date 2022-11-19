@@ -13,6 +13,11 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Optional;
 
+/**
+ * - Custom UserDetails 사용 안함
+ * - HelloAuthorityUtils를 바로 사용(정적인 방식)하여 Spring Security에 Role 정보 제공
+ */
+
     @Component
     public class HelloUserDetailsService implements UserDetailsService {   // (1)
 
@@ -37,7 +42,7 @@ import java.util.Optional;
         public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
             Optional<Member> optionalMember = memberRepository.findByEmail(username);
-
+            
             Member findMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
             //i ⭐ HelloAuthorityUtils를 이용해 DB에서 조회한 회원의 이메일을 이용해
             //i ⭐ Role 기반의 권한 정보 컬렉션 생성
@@ -46,6 +51,7 @@ import java.util.Optional;
             //i ⭐ UserDetails 인터페이스의 구현체인 User 객체를 통해 제공
             return new User(findMember.getEmail(), findMember.getPassword(), authorities);
         }
+        
 
         /**
          * ⭐ UserDetails

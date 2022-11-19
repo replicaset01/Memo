@@ -5,7 +5,6 @@ import com.codestates.exception.ExceptionCode;
 import com.codestates.member.Member;
 import com.codestates.member.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,14 +15,14 @@ import java.util.Optional;
 
 /**
  * - Custom UserDetails 사용
- * - HelloAuthorityUtils를 바로 사용(정적인 방식)하여 Spring Security에 Role 정보 제공
+ * - User Role을 DB에서 조회한 후, HelloAuthorityUtils로 Spring Security에게 Role 정보 제공
  */
-//@Component
-public class HelloUserDetailsServiceV2 implements UserDetailsService {
+@Component
+public class HelloUserDetailsServiceV3 implements UserDetailsService {
     private final MemberRepository memberRepository;
     private final HelloAuthorityUtils authorityUtils;
 
-    public HelloUserDetailsServiceV2(MemberRepository memberRepository, HelloAuthorityUtils authorityUtils) {
+    public HelloUserDetailsServiceV3(MemberRepository memberRepository, HelloAuthorityUtils authorityUtils) {
         this.memberRepository = memberRepository;
         this.authorityUtils = authorityUtils;
     }
@@ -42,11 +41,13 @@ public class HelloUserDetailsServiceV2 implements UserDetailsService {
             setFullName(member.getFullName());
             setEmail(member.getEmail());
             setPassword(member.getPassword());
+            setRoles(member.getRoles());
         }
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            return authorityUtils.createAuthorities(this.getEmail());
+            System.out.println("USER Role 정보는 DB에 있는걸로 제공");
+            return authorityUtils.createAuthorities(getRoles());
         }
 
         @Override
