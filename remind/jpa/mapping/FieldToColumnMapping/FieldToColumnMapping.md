@@ -1,3 +1,4 @@
+```java
 //i 1. Field <-> Column 매핑
 
 @NoArgsConstructor
@@ -58,3 +59,4 @@ public class JpaColumnMappingConfig {
         tx.commit();
     }
 }
+```

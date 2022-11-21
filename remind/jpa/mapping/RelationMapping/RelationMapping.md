@@ -1,3 +1,4 @@
+```java
 
 //i 1. N:1에서 N쪽 연관관계 매핑
 
@@ -46,7 +47,7 @@ public class JpaManyToOneUniDirectionConfig {
     }
 }
 
-//i 3. 1쪽에서 양방향 관계 추가
+//i 3. 1쪽에서 양방향 관계 매핑
 
     //i Member Entity에 추가
     @OneToMany(mappedBy = "member")
@@ -80,3 +81,4 @@ public class JpaManyToOneUniDirectionConfig {
                             + ", " + findOrder.getOrderStatus());
                 });
     }
+```
