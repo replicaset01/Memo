@@ -17,6 +17,10 @@ implementation 'org.springframework.boot:spring-boot-starter-web'
 implementation 'org.mapstruct:mapstruct:1.4.2.Final'
 annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 
+⭐ [Thymeleaf]
+implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+implementation 'org.springframework.boot:spring-boot-starter-thymeleaf
+
 ⭐ [Spring Data JDBC]
 implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 runtimeOnly 'com.h2database:h2'
@@ -70,4 +74,19 @@ dependsOn copyDocument    // :bootJar 실행 전, :copyDocument 가 선행되도
 from ("${asciidoctor.outputDir}") {  // Asciidoctor로 생성되는 index.html을 Jar에 추가
 into 'static/docs'    
 }
+
+⭐ [JJWT]
+implementation 'org.springframework.boot:spring-boot-starter-security'
+implementation 'org.springframework.boot:spring-boot-starter-web'
+testImplementation 'org.springframework.boot:spring-boot-starter-test'
+testImplementation 'org.springframework.security:spring-security-test'
+
+implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+runtimeOnly	'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+
+⭐ [JUnit5]
+ testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+ testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 ```
