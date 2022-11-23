@@ -57,7 +57,7 @@ public class JwtTokenizerTest {
     public void generateRefreshTokenTest() {
         String subject = "test refresh token";
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, 24);
+        calendar.add(Calendar.HOUR, 24));
         Date expiration = calendar.getTime();
 
         String refreshToken = jwtTokenizer.generateRefreshToken(subject, expiration, base64EncodedSecretKey);
