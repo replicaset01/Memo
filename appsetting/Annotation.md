@@ -224,4 +224,8 @@ Spring을 사용하지않고 순수 Mockito의 기능만 사용하기 위해 클
 ⭐ @InjectMocks	
 @Mock을 설정한 객체가 InjectMocks를 추가한 필드에 주입
 
+⭐ @ElementCollection
+속성 fetch = FetchType.EAGER
+유저 등록시, 유저의 권한 테이블 생성
+
 ```
