@@ -75,6 +75,9 @@ from ("${asciidoctor.outputDir}") {  // Asciidoctor로 생성되는 index.html�
 into 'static/docs'    
 }
 
+⭐ [Spring Security]
+implementation 'org.springframework.boot:spring-boot-starter-security'
+
 ⭐ [JJWT]
 implementation 'org.springframework.boot:spring-boot-starter-security'
 implementation 'org.springframework.boot:spring-boot-starter-web'

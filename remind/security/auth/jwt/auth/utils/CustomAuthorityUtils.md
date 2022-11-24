@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class HelloAuthorityUtils {
+public class CustomAuthorityUtils {
     @Value("${mail.address.admin}")
     private String adminMailAddress;
 
@@ -42,5 +42,4 @@ public class HelloAuthorityUtils {
         return USER_ROLES_STRING;
     }
 }
-
 ```

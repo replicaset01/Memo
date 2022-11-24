@@ -25,13 +25,27 @@ MemberDto에 password Field 추가
 Member에 password Field 추가, roles(권한 테이블 생성) 추가
 
 //i 구현
-⭐MemberDetailsService 구현, 내부 private final 클래스로 custom MemberDetails 존재
+---------------------------------------------
+⭐//i MemberService = PW 암호화, Role 생성 후 DB 저장 로직 구현
+주입 = PasswordEncoder, CustomAuthorityUtils
 
-⭐로그인 인증정보 역직렬화를 위한 LoginDto 구현
+createMember에 암호화,Role생성 후 DB 저장 로직 구현
+---------------------------------------------
+⭐//i MemberDetailsService
+내부 private final 클래스로 custom MemberDetails 존재
+내부 클래스에서 User의 권한 생성
+Spring Security에서 인식 할 수 있는 username을 Member 클래스의 Email주소로 채움
 
-⭐JWT를 생성하는 KwtTokenizer 구현
+---------------------------------------------
+⭐//i 로그인 인증정보 역직렬화를 위한 LoginDto 구현
+멤버= username, password
 
-⭐로그인 인증을 처리하는 Custom Security Filter 구현
+---------------------------------------------
+⭐//i JWT를 생성하는 JwtTokenizer 구현
+평문 인코딩, Access & Refresh Token 생성, secret Key 생성, JWT 검증 기능
+
+---------------------------------------------
+⭐//i 로그인 인증을 처리하는 Custom Security Filter 구현
 Annotation = @SneakyThrows, @Override
 상속 = UsernamePasswordAuthenticationFilter
 DI = AuthenticationManager, JwtTokenizer
@@ -53,7 +67,9 @@ param = HttpServletRequest & Response, FilterChain, Authentication {
 
 Access 토큰 생성 로직 String
 
-⭐Custom Filter 추가를 위한 SecurityConfiguration에 설정 추가
+---------------------------------------------
+⭐//i Custom Filter 추가를 위한 SecurityConfiguration에 설정 추가
 
-⭐로그인 인증성공, 실패에 따른 추가 처리 클래스인  AuthenticationSuccessHandler, AuthenticationFailureHandler 구현
+---------------------------------------------
+⭐//i 로그인 인증성공, 실패에 따른 추가 처리 클래스인  AuthenticationSuccessHandler, AuthenticationFailureHandler 구현
 ```
