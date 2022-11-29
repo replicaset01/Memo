@@ -14,12 +14,12 @@ implementation 'javax.inject:javax.inject:1'
 implementation 'org.springframework.boot:spring-boot-starter-web'
 
 ⭐ [MapStruct]
-implementation 'org.mapstruct:mapstruct:1.4.2.Final'
-annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 
 ⭐ [Thymeleaf]
-implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 implementation 'org.springframework.boot:spring-boot-starter-thymeleaf
+implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 ⭐ [Spring Data JDBC]
 implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
@@ -35,7 +35,7 @@ implementation 'org.springframework.boot:spring-boot-starter-jta-atomikos'
 ⭐ [Gson]
 implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
 
-⭐ [Apache HttpConponents]
+⭐ [Apache HttpComponents]
 implementation 'org.apache.httpcomponents:httpclient'
 
 ⭐ [Spring Rest Docs]   
@@ -79,7 +79,6 @@ into 'static/docs'
 implementation 'org.springframework.boot:spring-boot-starter-security'
 
 ⭐ [JJWT]
-implementation 'org.springframework.boot:spring-boot-starter-security'
 implementation 'org.springframework.boot:spring-boot-starter-web'
 testImplementation 'org.springframework.boot:spring-boot-starter-test'
 testImplementation 'org.springframework.security:spring-security-test'
@@ -88,8 +87,13 @@ implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 runtimeOnly	'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
+⭐ [Mail]
+implementation 'org.springframework.boot:spring-boot-starter-mail'
 
 ⭐ [JUnit5]
  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+ 
+⭐ [OAuth2]
+implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 ```

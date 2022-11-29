@@ -228,4 +228,10 @@ Spring을 사용하지않고 순수 Mockito의 기능만 사용하기 위해 클
 속성 fetch = FetchType.EAGER
 유저 등록시, 유저의 권한 테이블 생성
 
+⭐ @AuthenticationPrincipal 
+OAuth2User 타입으로 OAuth2User 객체를 얻음
+
+⭐ @RegisteredOAuth2AuthorizedClient("google")
+OAuth2AuthorizedClient 타입으로 파라미터로 OAuth2 AccessToken 객체를 얻음
+
 ```
