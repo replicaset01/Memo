@@ -96,4 +96,12 @@ implementation 'org.springframework.boot:spring-boot-starter-mail'
  
 ⭐ [OAuth2]
 implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+⭐ [WebFlux]
+implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+⭐ [r2dbc]
+	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+	//i H2 Non-Blocking Driver
+	runtimeOnly 'io.r2dbc:r2dbc-h2'
 ```
