@@ -21,26 +21,26 @@
       data-locations: classpath*:db/h2/data.sql
 ---------------------------------
 ⭐ [JPA Log Level 설정]
-  logging:
-    level:
-      org:
-        springframework:
-          orm:
-            jpa: DEBUG
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
             
 ---------------------------------
 ⭐ [HTTP Encoding CharSet 설정]
-  server:
-    servlet:
-      encoding:
-        charset: UTF-8
-        force-response: true
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force-response: true
         
 ---------------------------------
 ⭐ [Mail 설정]
-  mail:
-    address:
-      admin: admin@gmail.com
+mail:
+  address:
+    admin: admin@gmail.com
       
 ---------------------------------
 ⭐ [OAuth2 Client 설정]
