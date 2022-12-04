@@ -69,8 +69,38 @@
 ---
 
 > ### ⭐ AOP 트랜잭션
+
 * [TransactionInterceptor] 
   * 트랜잭션 어드바이스용
+  * 트랜잭션 경계 설정 & 적용
+  * 트랜잭션을 적용할 메소드에 트랜잭션 Attribute 매핑
+  * 트랜잭션 Attribute 지정
+    * *NameMatchTransactionAttributeSource* -> 메소드 이름 패턴에 따라 구분해서 적용 가능
+    * *TransactionManager* -> 트랜잭션 적용
+    * *RuleBasedTransactionAttribute* -> 조회 메소드를 제외한 공통 트랜잭션 & 조회 메소드에 적용할 Attribute 매핑
+  * 설정한 트랜잭션 Attribute를 Map 객체에 key를 '메소드 이름 패턴' 으로 지정해서 각각의 트랜잭션 Attribute 추가
+  * Map 객체를 Source로 넘겨줌
+  * TransactionInterceptor의 생성자 파라미터로 Manager, Source 리턴
+
+<br>
+
+---
+
+> ### ⭐ Distribute 트랜잭션
+* 서로 다른 DB를 하나의 트랜잭션으로 묶기 위함
+
+[구현]
+* DB 접속 정보 생성
+  * DataSource 타입의 메소드를 사용해 @Primary, @Bean 등록
+  * MysqlXADataSource 객체 생성
+  * AtomikosDataSourceBean 객체 생성, 이 객체를 이용하여 DB 접속 정보 생성
+
+* JPA의 EntityManager를 얻기위한 LocalContainerEntityManagerFactoryBean 사용
+  * LocalContainerEntitymanagerFactoryBean 타입의 메소드를 사용해 @Primary, @Bean 등록
+  * LocalContainerEntityManagerFactoryBean 객체 생성
+  * HibernateJpaVendorAdapter 객체 생성
+  * JTA 플랫폼 이름 설정 - LocalContainerEntityManagerFactoryBean
+  * 어댑터 설정 - HibernateJpaVendorAdapter
 
 
 
