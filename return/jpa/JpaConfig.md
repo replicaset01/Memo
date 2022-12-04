@@ -1,3 +1,4 @@
+```text
 //i 1. 영속성 컨텍스트에만 엔티티 저장
 
     private void example01() { //i ex01
@@ -63,3 +64,4 @@
         em.remove(member);
         tx.commit();
     }
+```
