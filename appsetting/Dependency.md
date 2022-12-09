@@ -17,6 +17,9 @@ implementation 'org.springframework.boot:spring-boot-starter-web'
 implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 
+⭐ [Validator]
+implementation 'org.springframework.boot:spring-boot-starter-validation'
+
 ⭐ [Thymeleaf]
 implementation 'org.springframework.boot:spring-boot-starter-thymeleaf
 implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
