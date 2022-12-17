@@ -231,3 +231,9 @@ OAuth2User 타입으로 OAuth2User 객체를 얻음
 
 ⭐ @RegisteredOAuth2AuthorizedClient("google")
 OAuth2AuthorizedClient 타입으로 파라미터로 OAuth2 AccessToken 객체를 얻음
+
+⭐ @RequiredArgsConstructor
+final 이 붙거나 @NotNull 이 붙은 필드의 생성자를 자동 생성해줌
+
+⭐ @Data
+Getter, Setter, ToString, EqualsAndHashCode, RequiredArgsConstructor 를 합친 어노테이션
