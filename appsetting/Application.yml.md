@@ -1,4 +1,11 @@
 ```text
+
+⭐ [인텔리제이 로그 한글 깨질때]
+server:
+  servlet:
+    encoding:
+      force-response: true
+
 ⭐ [H2 Database]
   h2:
     console:

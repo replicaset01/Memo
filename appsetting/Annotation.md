@@ -1,5 +1,3 @@
-```text
-
 ⭐ @Target(ElementType.TYPE) , @Retention(RetentionPolicy.RUNTIME), @Documented
 Custom Annotation 생성 시 사용
 
@@ -233,5 +231,3 @@ OAuth2User 타입으로 OAuth2User 객체를 얻음
 
 ⭐ @RegisteredOAuth2AuthorizedClient("google")
 OAuth2AuthorizedClient 타입으로 파라미터로 OAuth2 AccessToken 객체를 얻음
-
-```

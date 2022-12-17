@@ -1,4 +1,3 @@
-```text
 [Dependencies]
 
 ⭐ [Lombok]
@@ -7,15 +6,15 @@ annotationProcessor 'org.projectlombok:lombok'
 testCompileOnly 'org.projectlombok:lombok'
 testAnnotationProcessor 'org.projectlombok:lombok'
 
+⭐ [MapStruct]  [*** Processor ***가 롬복보다 뒤에 있어야함***]
+implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
 ⭐ [JSR-330 Provider]
 implementation 'javax.inject:javax.inject:1'
 
 ⭐ [Web] Scope 추가
 implementation 'org.springframework.boot:spring-boot-starter-web'
-
-⭐ [MapStruct]
-implementation 'org.mapstruct:mapstruct:1.5.3.Final'
-annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 
 ⭐ [Validator]
 implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -107,4 +106,3 @@ implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
 	//i H2 Non-Blocking Driver
 	runtimeOnly 'io.r2dbc:r2dbc-h2'
-```
