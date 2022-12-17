@@ -237,3 +237,6 @@ final 이 붙거나 @NotNull 이 붙은 필드의 생성자를 자동 생성해�
 
 ⭐ @Data
 Getter, Setter, ToString, EqualsAndHashCode, RequiredArgsConstructor 를 합친 어노테이션
+
+⭐ @CrossOrigin
+CORS 설정
