@@ -41,17 +41,31 @@ implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
 implementation 'org.apache.httpcomponents:httpclient'
 
 ⭐ [Spring Rest Docs]   
+
+id "org.asciidoctor.jvm.convert" version "3.3.2"
+
+ext {
+set('snippetsDir', file("build/generated-snippets"))
+}
+
+configurations {
+asciidoctorExtensions
+}
+
 // Rest Docs 의존 라이브러리
+
 testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'  
 asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
 // :test task 실행 시, 스니핏 디렉토리 경로 지정
+
 tasks.named('test') {
 outputs.dir snippetsDir
 useJUnitPlatform()
 }
 
 // :asciidoctor 실행 시, 기능 사용을 위해 task에 asccidoctorExtensions 설정
+
 tasks.named('asciidoctor') {
 configurations "asciidoctorExtensions"
 inputs.dir snippetsDir
@@ -60,6 +74,7 @@ dependsOn test
 
 // :build 실행 전 실행되는 task,  :copyDocument 가 실행 되면 index.html이 static 경로에 copy되며,
     그 파일은 API Docs를 파일로 외부 제공을 위한 용도로 사용 가능
+
 task copyDocument(type: Copy) {
 dependsOn asciidoctor            // :asciidoctor 실행 후 task 실행되도록 의존 설정
 from file("${asciidoctor.outputDir}")   // asciidoc 경로에 생성되는 index.html copy
