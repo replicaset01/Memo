@@ -1,5 +1,3 @@
-```java
-
 //i 1. N:1에서 N쪽 연관관계 매핑
 
     @ManyToOne
@@ -81,4 +79,3 @@ public class JpaManyToOneUniDirectionConfig {
                             + ", " + findOrder.getOrderStatus());
                 });
     }
-```
