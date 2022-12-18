@@ -242,4 +242,56 @@ Getter, Setter, ToString, EqualsAndHashCode, RequiredArgsConstructor 를 합친 
 CORS 설정
 
 ⭐ @AutoConfigureRestDocs
-RestDocs
+Spring RestDocs에 대한 자동 구성
+
+⭐ @WebMvcTest()
+컨트롤러를 테스트하기 위한 전용 어노테이션, 괄호 안에 테스트 대상 클래스 지정
+
+---------------------------------------------------------------
+[JPA Auditing]
+⭐ @EnableJpaAuditing (스프링부트의 Entry포인트인 Application 클래스에 적용)
+JPA 시간 자동 저장 기능 활성화
+
+⭐ @MappedSuperclass (클래스 적용)
+JPA Entity가 이 어노테이션이 붙은 추상 클래스를 상속할 경우, createDate, modifiedDate를 컬럼으로 인식
+
+@EntityListeners(a.class) (클래스 적용)
+해당 클래스에 괄호 안의 클래스의 기능 적용
+
+@CreatedDate     (필드 적용)
+Entity가 생성되어 저장될 때 시간 자동 저장
+
+@LastModifiedDate   (필드 적용)
+조회한 Entity의 값을 변경할 때 시간 자동 저장
+
+[위의 Auditing 기능을 정의한 클래스를 Entity에서 상속]
+-----------------------------------------------------------------
+
+⭐
+
+⭐
+
+⭐
+
+⭐
+
+⭐
+
+⭐
+
+⭐
+
+⭐
+
+⭐
+
+⭐
+
+⭐
+
+⭐
+
+⭐
+
+
+
