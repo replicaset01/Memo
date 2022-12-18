@@ -240,3 +240,6 @@ Getter, Setter, ToString, EqualsAndHashCode, RequiredArgsConstructor 를 합친 
 
 ⭐ @CrossOrigin
 CORS 설정
+
+⭐ @AutoConfigureRestDocs
+RestDocs
