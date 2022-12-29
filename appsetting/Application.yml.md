@@ -5,6 +5,7 @@ server:
   servlet:
     encoding:
       force-response: true
+      charset: UTF-8
 
 ⭐ [H2 Database]
   h2:
@@ -23,9 +24,9 @@ server:
     properties:
       hibernate:
         format_sql: true  # (3) SQL pretty print
-  sql:
-    init:
-      data-locations: classpath*:db/h2/data.sql
+//  sql:
+//    init:
+//      data-locations: classpath*:db/h2/data.sql
 ---------------------------------
 ⭐ [JPA Log Level 설정]
 logging:

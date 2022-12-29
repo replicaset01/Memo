@@ -1,5 +1,8 @@
 [Dependencies]
 
+⭐ [H2]
+runtimeOnly 'com.h2database:h2'
+
 ⭐ [Lombok]
 compileOnly 'org.projectlombok:lombok'
 annotationProcessor 'org.projectlombok:lombok'
